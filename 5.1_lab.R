@@ -39,4 +39,11 @@ par(mar=c(5,4,6,2))
 tuk <- glht(fit, linfct=mcp(diet.type="Tukey"))
 plot(cld(tuk, level=.05),col="lightgrey")
 
+#Задание
+#Добавить проверку на выборы и избавиться от них
+#повторно проверсти все тесты и сравнить результаты с выбросами и без
+#Открыть документ https://www.sheffield.ac.uk/polopoly_fs/1.547015!/file/Diet_data_description.docx
+#и попытаться выполнить задания из него
+
+
 
