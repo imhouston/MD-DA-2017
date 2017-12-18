@@ -39,13 +39,18 @@ attach(Default)
 help("Default")
 
 summary(Default)
+#Для тренировки модели выберем данные с доходом меньшим чем средний
 train_d <- income < mean(income)
+#Для проверки выберем оставшиеся
 test_d <- !train_d
 
+#Загрузим данные из набора в датафреймы
 training_data_d <- Default[train_d,]
 testing_data_d <- Default[test_d, -1]
 
+#Выберем вектор значений Y
 testing_y_d <- default[test_d]
+#подгоним логистическую регрессию
 fit_d <- glm(default ~ ., data = training_data_d, family = "binomial")
 summary(fit_d)
 
@@ -57,11 +62,11 @@ head(logistic_probabs_d)
 #приняв за дефолт вероятность большую чем 50%
 
 #Подготовим вектор с длиной равной вектору проверочных данных 
-logistic_pred_y_d <- rep('No',  length(testing_y_d)) #как мы поминм из лаборторных! rep повторяет занчение указанное чилсо раз
+logistic_pred_y_d <- rep('No',  length(testing_y_d)) #как мы поминм из лаборторных! rep повторяет значение указанное число раз
 #Изменим флаг дефолта для тех у кого вероятность этого больше 50%
 logistic_pred_y_d[logistic_probabs_d > 0.5] = 'Yes'
 
-#Покажем таблицу истинности
+#Покажем таблицу истинности http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/
 table(logistic_pred_y_d, testing_y_d)
 
 #процент ошибок классифицирования
